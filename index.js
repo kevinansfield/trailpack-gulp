@@ -30,16 +30,16 @@ module.exports = class Gulp extends Trailpack {
         //gulp.task(taskID, userTask)
 
         if (_.isFunction(task)) {
-          if (task.length > 0){
+          if (task.length > 1){
             gulp.task(taskID, (done) => {
               log('gulp: running ' + taskID)
-              return userTask(done)
+              return userTask(gulp, done)
             })
           }
           else {
             gulp.task(taskID, () => {
               log('gulp: running ' + taskID)
-              return userTask()
+              return userTask(gulp)
             })
           }
         }
@@ -52,16 +52,16 @@ module.exports = class Gulp extends Trailpack {
         const userTask = task.task
         //gulp.task(taskID, task.dependOf, userTask)
 
-        if (task.task.length > 0) {
+        if (task.task.length > 1) {
           gulp.task(taskID, task.dependsOf, (done) => {
             log('gulp: running ' + (task.description || taskID))
-            return userTask(done)
+            return userTask(gulp, done)
           })
         }
         else {
           gulp.task(taskID, task.dependsOf, () => {
             log('gulp: running ' + (task.description || taskID))
-            return userTask()
+            return userTask(gulp)
           })
         }
       }
@@ -90,4 +90,3 @@ module.exports = class Gulp extends Trailpack {
     })
   }
 }
-

@@ -14,7 +14,7 @@ const App = {
       defaultTaskName: 'default',
       tasks: {
         default: ['simple'],
-        simple: (done) => {
+        simple: (gulp, done) => {
           fs.writeFile('./test/ok', 'It\'s ok!', function (err) {
             done(err)
           })
